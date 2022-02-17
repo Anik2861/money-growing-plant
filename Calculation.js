@@ -40,21 +40,44 @@ function myFunction() {
     const expensesConsol = expenses.innerText
     const expensesFloat = parseFloat(expensesConsol);
 
-   expenses.innerText = totalExpenses
+    expenses.innerText = totalExpenses
 
     // total balance side start
     //  get  incomeInput 
     const incomeInput = document.getElementById('income-input').value
     const incomeConsol = parseFloat(incomeInput);
-   
-     
+
+
     //    get  balance element
     const totalBalance = document.getElementById('total-balance')
     const balanceConsol = totalBalance.innerText
     const balanceFloat = parseFloat(balanceConsol);
 
-    totalBalance.innerText = incomeConsol -  totalExpenses;
+    totalBalance.innerText = incomeConsol - totalExpenses;
 
 }
 
+document.getElementById("save-button").addEventListener('click', function () {
+    // get income input 
+    const incomeInput = document.getElementById('income-input').value
+    const incomeConsol = parseFloat(incomeInput);
+    // get save input
+    const saveInput = document.getElementById('save-input');
+    const saveValue = saveInput.value
+    const saveInputFloat = parseFloat(saveValue);
+    // percentage calculation
+    saveInput.value = (incomeConsol / 100) * saveInputFloat
 
+    const savingAmount = document.getElementById('saving-amount')
+    const savingConsol = savingAmount.innerText
+    const savingFloat = parseFloat(savingConsol);
+
+    savingAmount.innerText = saveInput.value
+
+    // remaining balance
+    const remaining = document.getElementById('remaining-balance').value
+    const remainingConsol = remaining.innerText
+
+
+
+})
