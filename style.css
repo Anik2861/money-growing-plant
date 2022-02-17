@@ -1,0 +1,10 @@
+/* style in iput div  */
+.field{
+    background-color: rgba(211, 211, 211, 0.219);
+}
+input{
+    background-color: rgba(128, 128, 128, 0.246);
+    border: none;
+    border-radius: 5px;
+}
+
