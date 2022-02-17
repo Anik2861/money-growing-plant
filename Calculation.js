@@ -1,83 +1,52 @@
-// document.getElementById('calculate-button').addEventListener('click', function () {
-/*  const incomeInput = document.getElementById('rent-input');
- const incomeConsol = incomeInput.value;
- const previousInput = parseFloat(incomeInput);
- incomeConsol.value = previousInput + incomeInput;
- 
- const foodInput = document.getElementById('food-input');
- const foodConsol = foodInput.value;
- const previousFood = parseFloat(foodInput);
- foodConsol.value = previousFood + foodInput;
- 
- 
- const clothInput = document.getElementById('cloth-input');
- const clothConsol = clothInput.value;
- const previousCloth = parseFloat(clothInput);
- clothConsol.value = previousCloth + foodInput; */
+// get each input & text:-
+const inputIncome = document.getElementById('input-income');
+const inputFood = document.getElementById('input-food');
+const inputRent = document.getElementById('input-rent');
+const inputClothes = document.getElementById('input-clothes');
+const calculateButton = document.getElementById("calculate-button");
+const totalExpenses = document.getElementById("total-expenses");
+const balance = document.getElementById("balance");
+const saveMoney = document.getElementById("save-money");
+const saveInput = document.getElementById("save-input")
+const percentInput = document.getElementById("percent-input");
+const remBalance = document.getElementById("rem-balance");
 
-/* 
-    function sumFunction() {
-       
-        const answer = a + b + c;
-        return answer ;
-        
-    }; */
-
-function myFunction() {
-    // total expenses side start
-    const rent = document.getElementById("rent-input").value;
-    const rentFloat = parseFloat(rent);
-
-    const food = document.getElementById("food-input").value;
-    const foodFloat = parseFloat(food);
-
-    const cloth = document.getElementById("cloth-input").value;
-    const clothFloat = parseFloat(cloth)
-    //    sum total expenses
-    var totalExpenses = rentFloat + foodFloat + clothFloat
-
-    const expenses = document.getElementById("total-expenses")
-    const expensesConsol = expenses.innerText
-    const expensesFloat = parseFloat(expensesConsol);
-
-    expenses.innerText = totalExpenses
-
-    // total balance side start
-    //  get  incomeInput 
-    const incomeInput = document.getElementById('income-input').value
-    const incomeConsol = parseFloat(incomeInput);
-
-
-    //    get  balance element
-    const totalBalance = document.getElementById('total-balance')
-    const balanceConsol = totalBalance.innerText
-    const balanceFloat = parseFloat(balanceConsol);
-
-    totalBalance.innerText = incomeConsol - totalExpenses;
-
+// Total income & expenses part start:-
+calculateButton.addEventListener('click', calculateFunction);
+function calculateFunction() {
+    const foodExpenses = parseInt(inputFood.value);
+    const rentExpenses = parseInt(inputRent.value);
+    const clothesExpenses = parseInt(inputClothes.value);
+    const total = foodExpenses + rentExpenses + clothesExpenses;
+    totalExpenses.innerText = total;
+    const inputValue = parseInt(inputIncome.value);
+    // error handling:-
+    if (inputValue >= total) {
+        // balance part start:-
+        const newBalance = inputValue - total;
+        balance.innerText = newBalance;
+        const finalBalance = balance.innerText;
+        return finalBalance;
+    }   
+    // error handling:-
+    else{
+        alert('There is not enough balance in your account.')
+    }
 }
 
-document.getElementById("save-button").addEventListener('click', function () {
-    // get income input 
-    const incomeInput = document.getElementById('income-input').value
-    const incomeConsol = parseFloat(incomeInput);
-    // get save input
-    const saveInput = document.getElementById('save-input');
-    const saveValue = saveInput.value
-    const saveInputFloat = parseFloat(saveValue);
-    // percentage calculation
-    saveInput.value = (incomeConsol / 100) * saveInputFloat
-
-    const savingAmount = document.getElementById('saving-amount')
-    const savingConsol = savingAmount.innerText
-    const savingFloat = parseFloat(savingConsol);
-
-    savingAmount.innerText = saveInput.value
-
-    // remaining balance
-    const remaining = document.getElementById('remaining-balance').value
-    const remainingConsol = remaining.innerText
-
-
-
-})
+// percent & Remaining part start:-
+saveInput.addEventListener('click', reserveMoney);
+function reserveMoney() {
+    const incomeValue = parseInt(inputIncome.value);
+    const percentText = parseInt(percentInput.value);
+    let percentNum = incomeValue / 100;
+    const saveAmount = percentNum * percentText;
+    if (saveAmount < calculateFunction()) {
+        saveMoney.innerText = saveAmount;
+        remBalance.innerText = calculateFunction() - saveAmount;
+    }
+     // error handling:-
+    else {
+        alert('There is not enough balance in your account.')
+    }
+}
